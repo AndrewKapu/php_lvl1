@@ -1,15 +1,26 @@
 <?php
 function menuGenerate() {
     $file = file_get_contents('index.html');
-    $menuElems = ['<div><a><span>Главная</span></a></div>',
-        '<div><a><span>Новости</span></a></div>',
-        '<div><a><span>О нас</span></a></div>',
-        '<div><a><span>Контакты</span></a></div>',];
-    $menuForHtml = '';
-    for ($i = 0; $i < count($menuElems); $i++) {
-        $menuForHtml .= $menuElems[$i];
+    $menuElems = [['menu' => 'Главная', 'subMenu' => null],
+        ['menu' => 'Новости', 'subMenu' => ['Новости спорта', 'Новости о политике', 'Новости науки',]],
+        ['menu' => 'О нас', 'subMenu' => null], ['menu' => 'Контакты', 'subMenu' => null]];
+    $menuHtml = null;
+    foreach ($menuElems as $menuValues) {
+        if ($menuValues['subMenu'] != null) {
+            $menuHtml .= "<div><a><span>$menuValues[menu]</span></a><div>";
+            foreach ($menuValues['subMenu'] as $value) {
+                $menuHtml .= "<a>$value</a>";
+            }
+            $menuHtml .= "</div></div>";
+        } else {
+            $menuHtml .= "<div><a><span>$menuValues[menu]</span></a></div>";
+        }
     }
-    $file = str_replace('{menu}', $menuForHtml, $file);
+
+    $file = str_replace('{menu}', $menuHtml, $file);
     return $file;
 }
+
+
 echo menuGenerate();
+
