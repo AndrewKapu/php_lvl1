@@ -2,7 +2,7 @@
     include('dbconnection.php');
     define('full_dir', 'img/');
     $id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
-    $sql = "select full_name from images WHERE id = $id";
+    $sql = "SELECT full_name FROM images WHERE id = $id";
     $res = mysqli_query($link, $sql);
     $row = mysqli_fetch_assoc($res);
     if(empty($row)) {
@@ -22,6 +22,7 @@
 </head>
 <body>
 <?php
+mysqli_query($link, "UPDATE images SET views_count = views_count + 1 WHERE images.id = $id");
 echo "<img src=" . full_dir . $full_name . " >"
 ?>
 </body>
