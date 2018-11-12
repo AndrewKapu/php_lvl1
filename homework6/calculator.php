@@ -1,26 +1,30 @@
 <?php
-if (!empty($_GET)) {
-    $param1 = $_GET['value1'];
-    $param2 = $_GET['value2'];
-    $operation = $_GET['mathOperation'];
-    $result = null;
-
-    switch($operation){
-        case 'Сложение':
-            return $result = $param1 + $param2;
-            break;
-        case 'Вычетание':
-            return $result = $param1 - $param2;
-            break;
-        case 'Умножение':
-            return $result = $param1 * $param2;
-            break;
-        case 'Деление':
-            return $result = $param1 / $param2;
-            break;
+    if (!empty($_GET)) {
+        $param1 = $_GET['value1'];
+        $param2 = $_GET['value2'];
+        $operation = $_GET['mathOperation'];
+        $result = calc($param1, $param2, $operation);
+        
     }
-   var_dump ($result);
-}
+
+    function calc($param1, $param2, $operation) {
+        $param1 = (int)$param1;
+        $param2 = (int)$param2;
+        if ($operation === 'Сложение') {
+            return $result = $param1 + $param2;
+        } elseif ($operation === 'Вычетание') {
+            return $result = $param1 - $param2;
+        }
+        elseif ($operation === 'Умножение') {
+            return $result = $param1 * $param2;
+        } elseif ($operation === 'Деление') {
+            if ($param2 == 0) {
+                return $result = 'На ноль делить нельзя';
+            } else {
+                return $result = $param1 / $param2;
+            }
+        }
+    }
  ?>
 <!doctype html>
 <html lang="en">
@@ -33,16 +37,17 @@ if (!empty($_GET)) {
 </head>
 <body>
 <h2>Калькулятор</h2>
-<form action="">
-    <input type="number" name="value1" placeholder="значение №1">
-    <input type="number" name="value2" placeholder="значение №2">
-    <select name="mathOperation">
-    <option value="Сложение">Сложение</option>
-    <option value="Вычетание">Вычетание</option>
-    <option value="Умножение">Умножение</option>
-    <option value="Деление">Деление</option>
-    </select>
-    <input type="submit">
-</form>
+    <form action="">
+        <input type="number" name="value1" placeholder="10">
+        <input type="number" name="value2" placeholder="5">
+        <select name="mathOperation">
+            <option value="Сложение">Сложение</option>
+            <option value="Вычетание">Вычетание</option>
+            <option value="Умножение">Умножение</option>
+            <option value="Деление">Деление</option>
+        </select>
+        <button type="submit">Посчитать</button>
+    </form>
+<h2>Результат операции - <?echo $result?></h2>
 </body>
 </html>
