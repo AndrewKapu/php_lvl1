@@ -1,6 +1,6 @@
 <?php 
 	session_start();
-	$link = mysqli_connect('localhost', 'root', '', 'gbphp') or die(mysqli_error($link));
+	$link = mysqli_connect('localhost', 'root', '', 'online-store') or die(mysqli_error($link));
 	define('LOG', 'kh lkj lkj ');
 
 	$page = empty($_GET['page']) ? 'login' : $_GET['page'];

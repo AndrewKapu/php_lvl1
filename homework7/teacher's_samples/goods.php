@@ -18,6 +18,7 @@ function show($link){
 	$content =<<<php
 		<h1>{$row['name']}</h1>
 		<p>{$row['info']}</p>
+		<a href='?page=user&action=add_to_cart&id=$id'>Купить</a>
 php;
 
 	$content .= "<h2>Комментарий</h2>";
