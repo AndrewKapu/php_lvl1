@@ -11,6 +11,7 @@ function index($link){
 
 function show($link){
 	$content = '';
+	// id товара
 	$id = (int)$_GET['id'];
 	$sql = "SELECT id, name, category_id, info FROM gods WHERE id = $id";
 	$res = mysqli_query($link, $sql);
@@ -18,7 +19,7 @@ function show($link){
 	$content =<<<php
 		<h1>{$row['name']}</h1>
 		<p>{$row['info']}</p>
-		<a href='?page=user&action=add_to_cart&id=$id'>Купить</a>
+		<a href='?page=user&action=add_to_cart&product_id=$id'>Купить</a>
 php;
 
 	$content .= "<h2>Комментарий</h2>";
