@@ -1,4 +1,4 @@
-<?php 
+<?php
 	session_start();
 	$link = mysqli_connect('localhost', 'root', '', 'online-store') or die(mysqli_error($link));
 	define('LOG', 'kh lkj lkj ');
@@ -6,15 +6,15 @@
 	$page = empty($_GET['page']) ? 'login' : $_GET['page'];
 	$action = empty($_GET['action']) ? 'index' : $_GET['action'];
 
-	if (!file_exists($page. '.php')){
+	if (!file_exists(__DIR__.'/'.$page. '.php')){
 		$page = 'login';
 	}
-	include($page . '.php');
+	include(__DIR__.'/'.$page . '.php');
 
 	if (!function_exists($action)){
 		$action = 'index';
 	}
-	$content = $action($link);
+	$content = $action();
 
 ?>
 <!DOCTYPE html>
@@ -30,7 +30,7 @@
 		<li><a href="?page=goods">Товары</a></li>
 	</ul>
 	<div style="width: 500px;float: left;margin-top: 45px;">
-		<?= $content; ?>	
+		<?= $content; ?>			
 	</div>
 	
 </body>

@@ -1,5 +1,7 @@
 <?
-function index($link){
+function index(){
+	global $link;
+
 	$content = '';
 	$res = mysqli_query($link, "SELECT id, name, category_id FROM gods");
 	while($row = mysqli_fetch_assoc($res)){
@@ -9,7 +11,9 @@ function index($link){
 	return $content;
 }
 
-function show($link){
+function show(){
+	global $link;
+
 	$content = '';
 	// id товара
 	$id = (int)$_GET['id'];
@@ -40,7 +44,9 @@ php;
 	return $content;
 }
 
-function addComment($link){
+function addComment(){
+	global $link;
+	
 	if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 		if (empty($_POST['text'])){
 			header('Location: /');

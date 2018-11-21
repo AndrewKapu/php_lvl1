@@ -1,5 +1,5 @@
 <?php 
-function index($link){
+function index(){
 	
 	$content = <<<php
 	<form method="post" action="?page=login&action=login">
@@ -16,8 +16,8 @@ php;
 	return $content;
 }
 
-function login($link){
-
+function login(){
+	global $link;
 	if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 		if (empty($_POST['login']) || empty($_POST['password'])){
 			header('Location: /');
@@ -43,7 +43,7 @@ function login($link){
 	exit;
 }
 
-function logout($link){
+function logout(){
 	session_destroy();
 	header('Location: /');
 	exit;
