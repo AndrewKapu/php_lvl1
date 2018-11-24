@@ -10,7 +10,6 @@
         <h4>$login</h4>
         Добро пожаловать на сайт!
         <a href="?page=user&action=show_cart">Посмотреть вашу корзину</a>
-        <a href="?page=user&action=moderate_order">Контролировать ваши заказы</a>
 php;
         return $content;
     }
@@ -127,7 +126,7 @@ php;
         echo 'Ваш закакз оформлен';                
     }
 
-    function moderate_order(){
+    /* function moderate_order(){
         global $link;
         $name = $_SESSION['name'];
         $sql = "SELECT order_json, status FROM orders WHERE user_name = '$name'";
@@ -144,5 +143,5 @@ php;
         }
         $content .= "<a href='?page=admin&action=show_orders'>Отказаться от заказа</a>";
         return $content;        
-    }    
+    }     */
 ?>
