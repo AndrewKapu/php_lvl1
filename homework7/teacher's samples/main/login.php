@@ -10,8 +10,6 @@ function index(){
 php;
 	if ($_SESSION['isAdmin'] == LOG){
 		$content = '<a href="?page=login&action=logout">Выход</a>';
-		$content .= '<a href="?page=user&action=render">Ваш личный кабинет</a>';
-		$content .= '<a href="?page=admin&action=show_orders">Модерация заказов</a>';
 	}
 
 	return $content;
@@ -21,13 +19,13 @@ function login(){
 	global $link;
 	if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 		if (empty($_POST['login']) || empty($_POST['password'])){
-			header('Location: ../public');
+			header('Location: /');
 			exit;
 		}
 	
 		$login = $_POST['login'];
 
-		$sql = "SELECT name, id, login, password FROM users WHERE login = '$login' ";
+		$sql = "SELECT name, login, password FROM users WHERE login = '$login' ";
 		$res = mysqli_query($link, $sql);
     	$row = mysqli_fetch_assoc($res);
 		$password = md5($_POST['password']);
@@ -36,18 +34,16 @@ function login(){
 				'isAdmin' => LOG,
 				'name' => $row['name'],
 				'login' => $row['login'],
-				'id' => $row['id'],
 			];
 		}
 	}
-
-	header('Location: ../public');
+	header('Location: /');
 	exit;
 }
 
 function logout(){
 	session_destroy();
-	header('Location: ../public');
+	header('Location: /');
 	exit;
 
 }

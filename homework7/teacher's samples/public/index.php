@@ -1,0 +1,2 @@
+<?
+	include('../main/index.php');
